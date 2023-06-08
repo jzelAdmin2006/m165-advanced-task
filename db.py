@@ -21,3 +21,6 @@ class Db:
 
     def get_all_softwares(self):
         return self.col.find()
+
+    def insert_software(self, name, producer):
+        self.col.insert_one({"name": name, "producer": producer, "keys": []})

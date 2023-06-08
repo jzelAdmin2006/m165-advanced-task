@@ -6,13 +6,16 @@ def proceed():
     while True:
         print('These are all softwares with their serial numbers:')
         for software in db.get_all_softwares():
-            print(str(software['_id']) + ': ' + software['name'])
+            print(str(software['_id']) + ': "' + software['name'] + '" by ' + software['producer'])
 
         commandInput = input('Please enter your command [i] insert software / [k] keys of software / [ik] insert software key / [q] quit: ')
         match commandInput:
             case 'q':
                 break
-
+            case 'i':
+                name = input('Please enter the software name: ')
+                producer = input('Please enter the name of the producer of the software "' + name + '": ')
+                db.insert_software(name, producer)
 
 
 if db.db_col_is_available():
