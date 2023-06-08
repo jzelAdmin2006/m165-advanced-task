@@ -3,10 +3,10 @@ import os
 from bson import ObjectId
 from pymongo import MongoClient
 
-
 CS_ENV = 'CS_MONGODB'
 DB_NAME = 'Softwares'
 COL_NAME = 'Keys'
+
 
 class Db:
     def __init__(self):

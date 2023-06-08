@@ -9,9 +9,10 @@ def proceed():
         for software in db.get_all_softwares():
             print(str(software['_id']) + ': "' + software['name'] + '" by ' + software['producer'])
 
-        commandInput = input(
-            'Please enter your command [i] insert software / [k] keys of software / [ik] insert software key / [q] quit: ')
-        match commandInput:
+        command_input = input(
+            'Please enter your command [i] insert software / [k] keys of software / [ik] insert software key / [q] '
+            'quit: ')
+        match command_input:
             case 'q':
                 break
             case 'i':
@@ -34,7 +35,6 @@ def proceed():
                     if software is not None:
                         db.insert_key(software, input('Please enter the new key: '))
                         break
-
 
 
 if db.db_col_is_available():
