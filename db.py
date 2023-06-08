@@ -18,4 +18,6 @@ class Db:
 
     def db_col_is_available(self):
         return DB_NAME in self.client.list_database_names() and COL_NAME in self.db.list_collection_names()
-    
+
+    def get_all_softwares(self):
+        return self.col.find()

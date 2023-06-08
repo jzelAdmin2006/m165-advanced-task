@@ -3,7 +3,9 @@ from db import Db
 db = Db()
 
 def proceed():
-    print('Hello, World!')
+    print('These are all softwares with their serial numbers:')
+    for software in db.get_all_softwares():
+        print(software['serial'] + ': ' + software['name'])
 
 
 if db.db_col_is_available():
