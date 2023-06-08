@@ -28,3 +28,6 @@ class Db:
 
     def get_software(self, serial):
         return self.col.find_one({'_id': ObjectId(serial)})
+
+    def insert_key(self, software, key):
+        return self.col.update_one({'_id': software['_id']}, {'$push': {'keys': key}})

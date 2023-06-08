@@ -27,6 +27,14 @@ def proceed():
                         for key in software['keys']:
                             print(key)
                         break
+            case 'ik':
+                while True:
+                    serial = input('Please enter the serial number of your software: ')
+                    software = db.get_software(serial)
+                    if software is not None:
+                        db.insert_key(software, input('Please enter the new key: '))
+                        break
+
 
 
 if db.db_col_is_available():
