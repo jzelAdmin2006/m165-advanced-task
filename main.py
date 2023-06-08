@@ -6,7 +6,7 @@ def proceed():
     while True:
         print('These are all softwares with their serial numbers:')
         for software in db.get_all_softwares():
-            print(software['serial'] + ': ' + software['name'])
+            print(str(software['_id']) + ': ' + software['name'])
 
         commandInput = input('Please enter your command [i] insert software / [k] keys of software / [ik] insert software key / [q] quit: ')
         match commandInput:
