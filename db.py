@@ -1,5 +1,6 @@
 import os
 
+from bson import ObjectId
 from pymongo import MongoClient
 
 
@@ -23,4 +24,7 @@ class Db:
         return self.col.find()
 
     def insert_software(self, name, producer):
-        self.col.insert_one({"name": name, "producer": producer, "keys": []})
+        self.col.insert_one({'name': name, 'producer': producer, 'keys': []})
+
+    def get_software(self, serial):
+        return self.col.find_one({'_id': ObjectId(serial)})
