@@ -22,7 +22,11 @@ def proceed():
             case 'k':
                 while True:
                     serial = input('Please enter the serial number of your software: ')
-                    software = db.get_software(serial)
+                    try:
+                        software = db.get_software(serial)
+                    except ValueError:
+                        print('The serial number is not valid.')
+                        continue
                     if software is not None:
                         print('These are all keys of the software "' + software['name'] + '": ')
                         for key in software['keys']:
