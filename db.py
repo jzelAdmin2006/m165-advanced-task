@@ -3,6 +3,8 @@ import os
 from bson import ObjectId
 from pymongo import MongoClient
 
+from software import Software
+
 CS_ENV = 'CS_MONGODB'
 DB_NAME = 'Softwares'
 COL_NAME = 'Keys'
@@ -21,13 +23,16 @@ class Db:
         return DB_NAME in self.client.list_database_names() and COL_NAME in self.db.list_collection_names()
 
     def get_all_softwares(self):
-        return self.col.find()
+        softwares = []
+        for software in self.col.find():
+            softwares.append(Software(**software))
+        return softwares
 
-    def insert_software(self, name, producer):
-        self.col.insert_one({'name': name, 'producer': producer, 'keys': []})
+    def insert_software(self, software):
+        self.col.insert_one(software.__dict__)
 
     def get_software(self, serial):
-        return self.col.find_one({'_id': ObjectId(serial)})
+        return Software(**self.col.find_one({'_id': ObjectId(serial)}))
 
     def insert_key(self, software, key):
-        return self.col.update_one({'_id': software['_id']}, {'$push': {'keys': key}})
+        return self.col.update_one({'_id': ObjectId(software.get_id())}, {'$push': {'keys': key}})
